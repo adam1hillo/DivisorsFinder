@@ -2,10 +2,9 @@ package pl.javastart.divisors;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class DivisorsFinder {
+class DivisorsFinder2 {
 
     static List<Integer> getDivisors(int number) {
         if (number == 0) {
@@ -14,7 +13,14 @@ class DivisorsFinder {
         List<Integer> divisors = createStream(number)
                 .filter(next -> isDivisor(number, next))
                 .boxed()
-                .collect(Collectors.toList())
+                .toList();
+        if (number < 0) {
+            divisors.addFirst(number);
+            divisors.add(-number);
+        } else {
+            divisors.add(number);
+        }
+        return divisors;
     }
 
     private static IntStream createStream(int number) {
